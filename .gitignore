@@ -1,3 +1,22 @@
+build*/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]libs/
+vc1[23456]/
+.vs/
+
+# irrklang
+irrKlang/
+
 # Prerequisites
 *.d
 
