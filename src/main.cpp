@@ -6,6 +6,8 @@
 
 #include "ProceduralAudioStreamLoader.h"
 #include "ProceduralAudioStream.h"
+#include "MyFileFactory.h"
+#include "MySoundEngine.h"
 
 #pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
@@ -65,22 +67,18 @@ int main() {
 	format.SampleFormat = ESampleFormat::ESF_S16;
 	format.SampleRate = 44100;
 
-	// Register generator
-
 	// start the sound engine with default parameters
-	ISoundEngine* engine = createIrrKlangDevice();
+	std::shared_ptr<MySoundEngine> engine = std::make_shared<MySoundEngine>();
 	if (!engine) {
 		return EXIT_FAILURE;
 	}
 
 	// Create and register loader
-	ProceduralAudioStreamLoader* loader = new ProceduralAudioStreamLoader();
-	engine->registerAudioStreamLoader(loader);
-	int t = 0;
-	std::string name = loader->registerProducer("Uniform", Generator(), format);
-	loader->drop();
+	ISoundSource* source = engine->addSoundSourceFromCallback(Generator(), "uniform", format);
 
-	engine->play2D(name.c_str());
+	//engine->play2D(source);
+	engine->play2D(engine->getSoundSource("uniform"));
+	//engine->play2D((std::string(MEDIA_DIR) + "bell.wav").c_str());
 
 	char i = 0;
 	while (i != 'q')
@@ -89,7 +87,6 @@ int main() {
 		std::cin >> i; // wait for user to press some key
 	}
 
-	engine->drop();
 
 	return EXIT_SUCCESS;
 }
