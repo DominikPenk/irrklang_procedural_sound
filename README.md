@@ -39,5 +39,6 @@ engine->play2D(source);
 
 A simple example can be found in [main.cpp](./src/main.cpp). 
 
-## Compilation
-The provided [./CmakeLists.txt](CMakeLists file)
+## Build
+The provided [CMakeLists.txt](./CMakeLists.txt) file only works on windows with Visual Studio 2019 and will download extract and kink IrrKlang 1.6.
+If you want to build on any other platform you will need to manually download the IrrKlang 1.6 binaries from the [official website](https://www.ambiera.com/irrklang/downloads.html).
